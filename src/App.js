@@ -1,4 +1,4 @@
-import ResultTable from './Components/UserInput/ResultTable/ResultTable';
+import ResultTable from './Components/ResultTable/ResultTable';
 import UserInput from './Components/UserInput/UserInput';
 import logo from './assets/investment-calculator-logo.png';
 import React, { useState } from 'react';
