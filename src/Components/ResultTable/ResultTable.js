@@ -1,5 +1,6 @@
 import './ResultTable.css';
 const ResultTable = (props) => {
+    const initSave = props.initSave;
 
     return (
         <div>
@@ -14,16 +15,20 @@ const ResultTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>YEAR NUMBER</td>
-                        <td>TOTAL SAVINGS END OF YEAR</td>
-                        <td>INTEREST GAINED IN YEAR</td>
-                        <td>TOTAL INTEREST GAINED</td>
-                        <td>TOTAL INVESTED CAPITAL</td>
-                    </tr>
+                    {props.data.map((ydata) => {
+                        return (
+                            < tr >
+                                <td>{ydata.year}</td>
+                                <td>{ydata.savingsEndOfYear}</td>
+                                <td>{ydata.yearlyInterest}</td>
+                                <td>{ydata.savingsEndOfYear - initSave - ydata.yearlyContribution * ydata.year}</td>
+                                <td>{initSave + ydata.yearlyContribution * ydata.year}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
-        </div>
+        </div >
     );
 }
 

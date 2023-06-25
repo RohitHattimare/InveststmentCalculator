@@ -5,18 +5,19 @@ import React, { useState } from 'react';
 
 function App() {
 
-  const [formInput, setFormInput] = useState({ 'current-savings': "", 'yearly-contribution': "", 'expected-return': "", 'duration': "" })
+  const [userInputData, setUserInputData] = useState(null)
 
   const calculateHandler = (userInput) => {
+    setUserInputData(userInput)
+  };
 
-    // Should be triggered when form is submitted
-    // You might not directly want to bind it to the submit event on the form though...
-    const yearlyData = []; // per-year results
-    let currentSavings = +userInput['current-savings']; // feel free to change the shape of this input object!
-    const yearlyContribution = +userInput['yearly-contribution']; // as mentioned: feel free to change the shape...
-    const expectedReturn = +userInput['expected-return'] / 100;
-    const duration = +userInput['duration'];
+  const yearlyData = []; // per-year results
 
+  if (userInputData) {
+    let currentSavings = +userInputData['current-savings']; // feel free to change the shape of this input object!
+    const yearlyContribution = +userInputData['yearly-contribution']; // as mentioned: feel free to change the shape...
+    const expectedReturn = +userInputData['expected-return'] / 100;
+    const duration = +userInputData['duration'];
     // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
@@ -29,9 +30,8 @@ function App() {
         yearlyContribution: yearlyContribution,
       });
     }
-    console.log('yearly-data', yearlyData);
-    // do something with yearlyData ...
-  };
+    console.log("yearlyData", yearlyData);
+  }
 
   // {/* Todo: Show below table conditionally (only once result data is available) */ }
   // {/* Show fallback text if no data is available */ }
@@ -43,7 +43,9 @@ function App() {
         <h1>Investment Calculator</h1>
       </header>
       <UserInput calculateHandler={calculateHandler} />
-      <ResultTable />
+      {!userInputData && <h5>No data available</h5>}
+      {userInputData && console.log('UserData', userInputData['current-savings'])}
+      {userInputData && <ResultTable data={yearlyData} initSave={userInputData['current-savings']} />}
     </div>
   );
 }
