@@ -1,11 +1,11 @@
-import './UserInput.css';
 import React, { useState } from 'react';
+import classes from './UserInput.module.css';
 
 const intialUserInfo = {
-    'current-savings': 10000,
-    'yearly-contribution': 1000,
-    'expected-return': 7,
-    'duration': 10
+    'current-savings': null,
+    'yearly-contribution': null,
+    'expected-return': null,
+    'duration': null
 }
 
 const UserInput = (props) => {
@@ -16,7 +16,7 @@ const UserInput = (props) => {
         setInputInfo((prevState) => {
             return {
                 ...prevState,
-                [input]: value
+                [input]: +value,
             }
         })
     }
@@ -42,8 +42,8 @@ const UserInput = (props) => {
 
     return (
 
-        <form onSubmit={submitHandler} className="form">
-            <div className="input-group">
+        <form onSubmit={submitHandler} className={classes.form}>
+            <div className={classes['input-group']}>
                 <p>
                     <label htmlFor="current-savings'">Current Savings ($)</label>
                     <input
@@ -61,7 +61,7 @@ const UserInput = (props) => {
                         id="yearly-contribution" />
                 </p>
             </div>
-            <div className="input-group">
+            <div className={classes["input-group"]}>
                 <p>
                     <label htmlFor="expected-return">
                         Expected Interest (%, per year)
@@ -80,15 +80,15 @@ const UserInput = (props) => {
                         id="duration" />
                 </p>
             </div>
-            <p className="actions">
-                <button type="reset" onClick={resetHandler} className="buttonAlt">
+            <p className={classes.actions}>
+                <button type="reset" onClick={resetHandler} className={classes.buttonAlt}>
                     Reset
                 </button>
-                <button type="submit" className="button">
+                <button type="submit" className={classes.button}>
                     Calculate
                 </button>
             </p>
-        </form>
+        </form >
     )
 }
 

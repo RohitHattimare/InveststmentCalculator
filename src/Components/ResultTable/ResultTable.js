@@ -1,4 +1,4 @@
-import "./ResultTable.css";
+import styles from "./ResultTable.module.css";
 
 //To make number 2 digits using international formatter
 const formatter = new Intl.NumberFormat("en-US", {
@@ -12,7 +12,7 @@ const ResultTable = (props) => {
 
     return (
         <div>
-            <table className="result">
+            <table className={styles.result}>
                 <thead>
                     <tr>
                         <th>Year</th>
@@ -27,7 +27,8 @@ const ResultTable = (props) => {
                         return (
                             <tr key={ydata.year}>
                                 <td>{ydata.year}</td>
-                                <td>{ydata.savingsEndOfYear.toFixed(2)}</td>
+                                {/* <td>{ydata.savingsEndOfYear.toFixed(2)}</td>  */}
+                                <td>{formatter.format(ydata.savingsEndOfYear)}</td>
                                 <td>{formatter.format(ydata.yearlyInterest)}</td>
                                 <td>
                                     {formatter.format(ydata.savingsEndOfYear -
