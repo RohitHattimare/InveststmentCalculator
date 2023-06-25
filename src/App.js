@@ -43,9 +43,8 @@ function App() {
         <h1>Investment Calculator</h1>
       </header>
       <UserInput calculateHandler={calculateHandler} />
-      {!userInputData && <h5>No data available</h5>}
-      {userInputData && console.log('UserData', userInputData['current-savings'])}
-      {userInputData && <ResultTable data={yearlyData} initSave={userInputData['current-savings']} />}
+      {yearlyData.length === 0 && <p style={{ textAlign: 'center', color: 'pink' }}>No data available</p>}
+      {yearlyData.length > 0 && <ResultTable data={yearlyData} initSave={userInputData['current-savings']} />}
     </div>
   );
 }
