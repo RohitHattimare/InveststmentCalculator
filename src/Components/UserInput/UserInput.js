@@ -55,7 +55,7 @@ const UserInput = (props) => {
                 <p>
                     <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
                     <input
-                        onChange={(event) => inputChangeHandler("c", event.target.value)}
+                        onChange={(event) => inputChangeHandler("yearly-contribution", event.target.value)}
                         value={inputInfo['yearly-contribution']}
                         type="number"
                         id="yearly-contribution" />

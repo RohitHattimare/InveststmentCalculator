@@ -1,4 +1,12 @@
-import './ResultTable.css';
+import "./ResultTable.css";
+
+//To make number 2 digits using international formatter
+const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+});
 const ResultTable = (props) => {
     const initSave = props.initSave;
 
@@ -17,19 +25,24 @@ const ResultTable = (props) => {
                 <tbody>
                     {props.data.map((ydata) => {
                         return (
-                            < tr >
+                            <tr key={ydata.year}>
                                 <td>{ydata.year}</td>
-                                <td>{ydata.savingsEndOfYear}</td>
-                                <td>{ydata.yearlyInterest}</td>
-                                <td>{ydata.savingsEndOfYear - initSave - ydata.yearlyContribution * ydata.year}</td>
-                                <td>{initSave + ydata.yearlyContribution * ydata.year}</td>
+                                <td>{ydata.savingsEndOfYear.toFixed(2)}</td>
+                                <td>{formatter.format(ydata.yearlyInterest)}</td>
+                                <td>
+                                    {formatter.format(ydata.savingsEndOfYear -
+                                        initSave -
+                                        ydata.yearlyContribution * ydata.year)}
+
+                                </td>
+                                <td>{formatter.format(initSave + ydata.yearlyContribution * ydata.year)}</td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </table>
-        </div >
+        </div>
     );
-}
+};
 
 export default ResultTable;
