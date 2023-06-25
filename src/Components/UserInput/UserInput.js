@@ -1,22 +1,29 @@
 import './UserInput.css';
 import React, { useState } from 'react';
 
+const intialUserInfo = {
+    'current-savings': 10000,
+    'yearly-contribution': 1000,
+    'expected-return': 7,
+    'duration': 10
+}
+
 const UserInput = (props) => {
 
-    const [inputInfo, setInputInfo] = useState({
-        'current-savings': 0,
-        'yearly-contribution': 0,
-        'expected-return': 0,
-        'duration': 0
-    });
+    const [inputInfo, setInputInfo] = useState(intialUserInfo);
 
     const inputChangeHandler = (input, value) => {
-        console.log(input, value);
+        setInputInfo((prevState) => {
+            return {
+                ...prevState,
+                [input]: value
+            }
+        })
     }
 
     const submitHandler = (event) => {
         event.preventDefault();
-        //update InputInfo
+        //update InputInfo not needed due to using of inputChange Handler
         // setInputInfo({
         //     'current-savings': 0,
         //     'yearly-contribution': 0,
@@ -29,7 +36,8 @@ const UserInput = (props) => {
     }
 
     const resetHandler = (event) => {
-        console.log(`resetting form ${event.target.value} ${event.target.id}`);
+        setInputInfo(intialUserInfo);
+        // console.log(`resetting form ${event.target.value} ${event.target.id}`);
     }
 
     return (
@@ -40,13 +48,15 @@ const UserInput = (props) => {
                     <label htmlFor="current-savings'">Current Savings ($)</label>
                     <input
                         onChange={(event) => inputChangeHandler("current-savings", event.target.value)}
+                        value={inputInfo['current-savings']}
                         type="number"
                         id="current-savings'" />
                 </p>
                 <p>
                     <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
                     <input
-                        onChange={(event) => inputChangeHandler("yearly-contribution", event.target.value)}
+                        onChange={(event) => inputChangeHandler("c", event.target.value)}
+                        value={inputInfo['yearly-contribution']}
                         type="number"
                         id="yearly-contribution" />
                 </p>
@@ -58,12 +68,14 @@ const UserInput = (props) => {
                     </label>
                     <input
                         onChange={(event) => inputChangeHandler("expected-return", event.target.value)}
+                        value={inputInfo['expected-return']}
                         type="number"
                         id="expected-return" />
                 </p>
                 <p>
                     <label htmlFor="duration">Investment Duration (years)</label>
                     <input onChange={(event) => inputChangeHandler("duration", event.target.value)}
+                        value={inputInfo['duration']}
                         type="number"
                         id="duration" />
                 </p>
