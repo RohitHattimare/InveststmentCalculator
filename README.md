@@ -25,7 +25,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/RohitHattimare/InveststmentCalculator.git
 
 2. Install Packages
      yarn install
